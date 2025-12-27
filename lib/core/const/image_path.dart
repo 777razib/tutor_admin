@@ -1,0 +1,31 @@
+class ImagePath {
+  static const String loginBg = "assets/images/loginBg.png";
+  static const String signupBg = "assets/images/signupbg.png";
+  static const String commentsIconImage = "assets/images/comments.png";
+  static const String location = "assets/images/location.png";
+  static const String noDataFound = "assets/images/noDataFound.png";
+  static const String logo1 = "assets/images/logo1.png";
+  static const String sister = "assets/images/sister.png";
+  static const String brother = "assets/images/brother.png";
+  static const String edit1 = "assets/images/edit1.png";
+  static const String changePassword = "assets/images/passwordChanged.png";
+  static const String user1 = "assets/images/user1.png";
+  static const String user2 = "assets/images/user2.png";
+  static const String user3 = "assets/images/user3.png";
+  static const String userDetails = "assets/images/userDetails.png";
+  static const String girl1 = "assets/images/girl1.jpg";
+  static const String girl2 = "assets/images/girl2.jpg";
+  static const String girl3 = "assets/images/girl3.jpg";
+  static const String girl4 = "assets/images/girl4.jpg";
+  static const String chat1 = "assets/images/chat1.png";
+  static const String chat2 = "assets/images/chat2.png";
+  static const String chat3 = "assets/images/chat3.png";
+  static const String chat4 = "assets/images/chat4.png";
+  static const String chooseFile = "assets/images/chooseFile.png";
+  static const String chooseImage = "assets/icons/chooseImage.png";
+  static const String like = "assets/images/like.png";
+  static const String dislike = "assets/images/dislike.png";
+  static const String loginBackground = "assets/images/loginBackground.png";
+  static const String loginBackground2 = "assets/images/loginBackground2.png";
+  static const String loginBackground3 = "assets/images/loginBackgroundUp.png";
+}

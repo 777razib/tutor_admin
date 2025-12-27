@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "997511987909",
+    "project_id": "tuitioni-1efa5",
+    "storage_bucket": "tuitioni-1efa5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997511987909:android:7458047d5229669ca126ac",
+        "android_client_info": {
+          "package_name": "com.example.admin_tutor_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgGeeszfWi7RNKvH0uJw623E1oZQZBoOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997511987909:android:e3de5b4c2cebb0e2a126ac",
+        "android_client_info": {
+          "package_name": "com.example.mehedi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgGeeszfWi7RNKvH0uJw623E1oZQZBoOI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
