@@ -70,6 +70,9 @@ class TutorRequestController extends GetxController {
         },
       );
 
+      debugPrint("--Request Api----Token: $token");
+      debugPrint("--Request Api----Response Status Code: ${response.statusCode}");
+      debugPrint("--Request Api----Response Body: ${response.body}");
       if (response.statusCode == 200) {
         TutorRequest tutorRequest = TutorRequest.fromRawJson(response.body);
         tutorRequests.value = tutorRequest.data ?? [];
@@ -97,6 +100,7 @@ class TutorRequestController extends GetxController {
         return;
       }
 
+
       var headers = {
         'Authorization': token,
         'Content-Type': 'application/json',
@@ -110,7 +114,10 @@ class TutorRequestController extends GetxController {
           "status": "ACCEPTED",
         }),
       );
-
+      debugPrint("--Request Api----Token: $token");
+      debugPrint("--Request Api----Tutor id: $tutorId");
+      debugPrint("--Request Api----Response Status Code: ${response.statusCode}");
+      debugPrint("--Request Api----Response Body: ${response.body}");
       if (response.statusCode == 200) {
         tutorRequests.removeWhere((t) => t.id == tutorId);
         Get.snackbar(
@@ -158,7 +165,10 @@ class TutorRequestController extends GetxController {
           "status": "CANCELLED",
         }),
       );
-
+      debugPrint("--Request Api----Token: $token");
+      debugPrint("--Request Api----Tutor id: $tutorId");
+      debugPrint("--Request Api----Response Status Code: ${response.statusCode}");
+      debugPrint("--Request Api----Response Body: ${response.body}");
       if (response.statusCode == 200) {
         tutorRequests.removeWhere((t) => t.id == tutorId);
         Get.snackbar(

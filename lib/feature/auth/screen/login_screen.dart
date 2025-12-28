@@ -1,6 +1,5 @@
 import 'package:admin_tutor_app/core/const/icons_path.dart';
 import 'package:admin_tutor_app/feature/auth/controller/login_controller.dart';
-import 'package:admin_tutor_app/feature/home/screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

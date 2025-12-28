@@ -5,7 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/const/app_colors.dart';
-import 'core/services_class/websocket/service.dart';
+import 'feature/get x dependencies injection/get_x_dependencies_injection.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -42,6 +42,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialBinding: GetXDependenciesInjection(),
       theme: ThemeData(
         colorSchemeSeed: AppColors.backgroundColor,
         useMaterial3: true,
