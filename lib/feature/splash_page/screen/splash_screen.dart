@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:admin_tutor_app/feature/auth/screen/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';

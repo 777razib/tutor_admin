@@ -5,11 +5,23 @@ import 'package:get/get_core/src/get_main.dart';
 
 import '../models/request_screen_model.dart';
 
-class RequestScreen extends StatelessWidget {
+class RequestScreen extends StatefulWidget {
   RequestScreen({super.key});
 
+  @override
+  State<RequestScreen> createState() => _RequestScreenState();
+}
+
+class _RequestScreenState extends State<RequestScreen> {
   final controller = Get.put(TutorRequestController());
 
+
+  @override
+  void initState() {
+    controller.fetchTutorRequests();
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,19 +43,21 @@ class RequestScreen extends StatelessWidget {
           return Center(child: Text("No requests available"));
         }
 
-        return RefreshIndicator(
-          onRefresh: () async {
-            await controller.fetchTutorRequests();
-          },
-          child: ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: controller.tutorRequests.length,
-            itemBuilder: (context, index) {
-              final req = controller.tutorRequests[index];
-              return _buildRequestCard(req);
+        return Obx((){
+          return RefreshIndicator(
+            onRefresh: () async {
+              await controller.fetchTutorRequests();
             },
-          ),
-        );
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: controller.tutorRequests.length,
+              itemBuilder: (context, index) {
+                final req = controller.tutorRequests[index];
+                return _buildRequestCard(req);
+              },
+            ),
+          );
+        });
       }),
     );
   }
@@ -131,6 +145,46 @@ class RequestScreen extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
+                    // Decline button
+                    controller.denyTutorRequest(tutorId: request.id);
+                    // অথবা আরও ভালো: confirmation dialog দেখাতে
+                    // controller.showConfirmDialog(tutorId: request.id, isAccept: false);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFE1F6F4),
+                    foregroundColor: const Color(0xFF009D8B),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text('Decline'),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Accept button - এখানে অবশ্যই acceptTutorRequest হবে
+                    controller.acceptTutorRequest(tutorId: request.id);
+                    // অথবা: controller.showConfirmDialog(tutorId: request.id, isAccept: true);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF009D8B),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text('Accept'),
+                ),
+              ),
+            ],
+          ),
+        /*  Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
                     controller.denyTutorRequest(tutorId: request.id);
                   },
                   style: ElevatedButton.styleFrom(
@@ -160,7 +214,7 @@ class RequestScreen extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          ),*/
         ],
       ),
     );
