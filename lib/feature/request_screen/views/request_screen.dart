@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
+import '../../home/widgets/show_dialog_box_widget.dart';
 import '../models/request_screen_model.dart';
 
 class RequestScreen extends StatefulWidget {
@@ -80,64 +81,87 @@ class _RequestScreenState extends State<RequestScreen> {
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 28,
-                backgroundImage: request.profileImage != null && request.profileImage!.isNotEmpty
-                    ? NetworkImage(request.profileImage!)
-                    : const AssetImage('assets/images/profile.png') as ImageProvider,
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      request.fullName != null && request.fullName!.isNotEmpty
-                          ? request.fullName!
-                          : 'No Name',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Subject: ${request.subject != null && request.subject!.isNotEmpty ? request.subject!.join(", ") : "N/A"}',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-
-                    const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        const Icon(Icons.access_time,
-                            size: 16, color: Colors.grey),
-                        const SizedBox(width: 4),
-                        Text(
-                          request.createdAt != null
-                              ? "${request.createdAt!.hour}:${request.createdAt!.minute}am"
-                              : "-",
-                          style:
-                          const TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(width: 12),
-                        const Icon(Icons.calendar_today,
-                            size: 16, color: Colors.grey),
-                        const SizedBox(width: 4),
-                        Text(
-                          request.createdAt != null
-                              ? "${request.createdAt!.day}-${request.createdAt!.month}-${request.createdAt!.year}"
-                              : "-",
-                          style:
-                          const TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                      ],
-                    ),
-                  ],
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (BuildContext context) {
+                  return ShowProfileDialogWidget(
+                    imageUrl: request.profileImage,
+                    fullName: request.fullName,
+                    email: request.email,
+                    phone: request.phoneNumber,
+                    gender: request.gender,
+                    city: request.city,
+                    hourlyRate: request.hourlyRate != null ? '${request.hourlyRate} BDT/hr' : 'N/A',
+                    subject: request.subject?.join(', ') ?? 'N/A',
+                    university: request.education??"N/A",
+                    experience: request.experience != null ? '${request.experience} years' : 'N/A',
+                    about: request.about,
+                  );
+                },
+              );
+            },
+            child: Row(
+              children: [
+                CircleAvatar(
+                  radius: 28,
+                  backgroundImage: request.profileImage != null && request.profileImage!.isNotEmpty
+                      ? NetworkImage(request.profileImage!)
+                      : const AssetImage('assets/images/profile.png') as ImageProvider,
                 ),
-              ),
-            ],
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        request.fullName != null && request.fullName!.isNotEmpty
+                            ? request.fullName!
+                            : 'No Name',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Subject: ${request.subject != null && request.subject!.isNotEmpty ? request.subject!.join(", ") : "N/A"}',
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          const Icon(Icons.access_time,
+                              size: 16, color: Colors.grey),
+                          const SizedBox(width: 4),
+                          Text(
+                            request.createdAt != null
+                                ? "${request.createdAt!.hour}:${request.createdAt!.minute}am"
+                                : "-",
+                            style:
+                            const TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(width: 12),
+                          const Icon(Icons.calendar_today,
+                              size: 16, color: Colors.grey),
+                          const SizedBox(width: 4),
+                          Text(
+                            request.createdAt != null
+                                ? "${request.createdAt!.day}-${request.createdAt!.month}-${request.createdAt!.year}"
+                                : "-",
+                            style:
+                            const TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 16),
           Row(
