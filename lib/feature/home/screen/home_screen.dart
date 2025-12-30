@@ -1,5 +1,6 @@
 import 'package:admin_tutor_app/core/services_class/local_service/shared_preferences_helper.dart';
 import 'package:admin_tutor_app/feature/auth/screen/login_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:admin_tutor_app/feature/home/screen/handle_disputes_screen.dart';
@@ -16,6 +17,7 @@ import '../controller/notification_controller.dart';
 import '../widgets/bar_chart.dart';
 import '../widgets/navigation_bar.dart';
 import '../widgets/number_formatter.dart';
+import '../widgets/show_dialog_box_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
@@ -316,31 +318,54 @@ class _HomeScreenState extends State<HomeScreen> {
         BoxShadow(color: Colors.black.withOpacity(0.05), spreadRadius: 2, blurRadius: 10, offset: const Offset(0, 4)),
       ]),
       child: Column(children: [
-        Row(children: [
-          CircleAvatar(
-            radius: 28,
-            backgroundImage: request.profileImage != null && request.profileImage!.isNotEmpty
-                ? NetworkImage(request.profileImage!) : const AssetImage('assets/images/profile.png') as ImageProvider,
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(request.fullName ?? 'No Name', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-              const SizedBox(height: 4),
-              Text('Subject: ${request.subject?.join(", ") ?? "N/A"}', style: const TextStyle(color: Colors.grey)),
-              const SizedBox(height: 8),
-              Row(children: [
-                const Icon(Icons.access_time, size: 16, color: Colors.grey),
-                const SizedBox(width: 4),
-                Text(request.createdAt != null ? "${request.createdAt!.hour}:${request.createdAt!.minute}am" : "-", style: const TextStyle(color: Colors.grey, fontSize: 12)),
-                const SizedBox(width: 12),
-                const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
-                const SizedBox(width: 4),
-                Text(request.createdAt != null ? "${request.createdAt!.day}-${request.createdAt!.month}-${request.createdAt!.year}" : "-", style: const TextStyle(color: Colors.grey, fontSize: 12)),
+        GestureDetector(
+          onTap: () {
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return ShowProfileDialogWidget(
+                  imageUrl: request.profileImage,
+                  fullName: request.fullName,
+                  email: request.email,
+                  phone: request.phoneNumber,
+                  gender: request.gender,
+                  city: request.city,
+                  hourlyRate: request.hourlyRate != null ? '${request.hourlyRate} BDT/hr' : 'N/A',
+                  subject: request.subject?.join(', ') ?? "N/A",
+                  university: request.education??"N/A",
+                  experience: request.experience != null ? '${request.experience} years' : 'N/A',
+                  about: request.about,
+                );
+              },
+            );
+          },
+          child: Row(children: [
+            CircleAvatar(
+              radius: 28,
+              backgroundImage: request.profileImage != null && request.profileImage!.isNotEmpty
+                  ? NetworkImage(request.profileImage!) : const AssetImage('assets/images/profile.png') as ImageProvider,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Text(request.fullName ?? 'No Name', style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                const SizedBox(height: 4),
+                Text('Subject: ${request.subject?.join(", ") ?? "N/A"}', style: const TextStyle(color: Colors.grey)),
+                const SizedBox(height: 8),
+                Row(children: [
+                  const Icon(Icons.access_time, size: 16, color: Colors.grey),
+                  const SizedBox(width: 4),
+                  Text(request.createdAt != null ? "${request.createdAt!.hour}:${request.createdAt!.minute}am" : "-", style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                  const SizedBox(width: 12),
+                  const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
+                  const SizedBox(width: 4),
+                  Text(request.createdAt != null ? "${request.createdAt!.day}-${request.createdAt!.month}-${request.createdAt!.year}" : "-", style: const TextStyle(color: Colors.grey, fontSize: 12)),
+                ]),
               ]),
-            ]),
-          ),
-        ]),
+            ),
+          ]),
+        ),
         const SizedBox(height: 16),
         Row(children: [
           Expanded(

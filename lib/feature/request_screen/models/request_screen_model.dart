@@ -40,6 +40,12 @@ class TutorReqData {
   Role? role;
   List<String>? subject;
   DateTime? createdAt;
+  String? phoneNumber;
+  String? gender;
+  String? city;
+  String? about;
+  int? hourlyRate;
+  String? education;
 
   TutorReqData({
     this.id,
@@ -53,6 +59,12 @@ class TutorReqData {
     this.role,
     this.subject,
     this.createdAt,
+    this.phoneNumber,
+    this.gender,
+    this.city,
+    this.about,
+    this.hourlyRate,        // যোগ করা হয়েছে
+    this.education,         // যোগ করা হয়েছে
   });
 
   factory TutorReqData.fromRawJson(String str) => TutorReqData.fromJson(json.decode(str));
@@ -65,12 +77,22 @@ class TutorReqData {
     experience: json["experience"],
     isTutorApproved: json["isTutorApproved"],
     isTutorRequest: json["isTutorRequest"],
-    tutorRequestStatus: tutorRequestStatusValues.map[json["tutorRequestStatus"]]!,
+    tutorRequestStatus: json["tutorRequestStatus"] == null
+        ? null
+        : tutorRequestStatusValues.map[json["tutorRequestStatus"]],
     profileImage: json["profileImage"],
     email: json["email"],
-    role: roleValues.map[json["role"]]!,
-    subject: json["subject"] == null ? [] : List<String>.from(json["subject"]!.map((x) => x)),
+    role: json["role"] == null ? null : roleValues.map[json["role"]],
+    subject: json["subject"] == null
+        ? []
+        : List<String>.from(json["subject"]!.map((x) => x)),
     createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+    phoneNumber: json["phoneNumber"],
+    gender: json["gender"],
+    city: json["city"],
+    about: json["about"],
+    hourlyRate: json["hourlyRate"],
+    education: json["education"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -79,12 +101,20 @@ class TutorReqData {
     "experience": experience,
     "isTutorApproved": isTutorApproved,
     "isTutorRequest": isTutorRequest,
-    "tutorRequestStatus": tutorRequestStatusValues.reverse[tutorRequestStatus],
+    "tutorRequestStatus": tutorRequestStatus == null
+        ? null
+        : tutorRequestStatusValues.reverse[tutorRequestStatus],
     "profileImage": profileImage,
     "email": email,
-    "role": roleValues.reverse[role],
+    "role": role == null ? null : roleValues.reverse[role],
     "subject": subject == null ? [] : List<dynamic>.from(subject!.map((x) => x)),
     "createdAt": createdAt?.toIso8601String(),
+    "phoneNumber": phoneNumber,
+    "gender": gender,
+    "city": city,
+    "about": about,
+    "hourlyRate": hourlyRate,
+    "education": education,
   };
 }
 
